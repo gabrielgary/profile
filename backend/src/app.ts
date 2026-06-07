@@ -20,6 +20,7 @@ app.use(
     strict: true,
   }),
 );
+
 app.use(express.urlencoded({extended:true}))
 
 // routes

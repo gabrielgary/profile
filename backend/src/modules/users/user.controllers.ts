@@ -32,18 +32,22 @@ class UserController {
   public async GetUserData(
     request: Request,
     response: Response,
-  ): Promise<ResponseAPIType<GetDataDtoUser>> {
-    const  email_user  = "request.params";
-    const result = await userServices.GetUserDAta(email_user?.toString() || "");
+  ){ 
+    const  {email_user}  = request.params;
+    const email_user_string=email_user?.toString()
+    const result = await userServices.GetUserDAta(email_user_string || "");
     if (result.sucess) {
-      return {
-        code_status: result.code_status,
-        data: result.data,
-        message: "user data returning successifull",
-        sucess: false,
-      };
+      response.status(result.code_status).json(
+
+        {
+          code_status: result.code_status,
+          data: result.data,
+          message: "user data returning successfuly",
+          sucess: false,
+        }
+      )
     } else {
-      return {
+      response.status(result.code_status).json( {
         code_status: result.code_status,
         data: {
           code_user: "not found",
@@ -56,8 +60,9 @@ class UserController {
         },
         message: "user not fount",
         sucess: false,
-      };
+      })
     }
+  
   }
 }
 
