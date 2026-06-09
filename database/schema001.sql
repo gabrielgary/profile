@@ -5,7 +5,7 @@ create table users(
     code_user serial primary key,
     name_user varchar(100) not null,
     email_user varchar(150) not null unique,
-    title_user varchar(200),
+    title_job_user varchar(200),
     description_user text,
     password_user text,
     profile_user text,
@@ -15,8 +15,8 @@ create table projects(
     code_project serial primary key,
     title_project varchar(200) not null, 
     description_project text not null, 
-    tools_projects jsonb  not null,
-    likes int
+    tools_project jsonb  not null,
+    likes_project int
 );
 create table message(
     code_message serial primary key,
@@ -25,8 +25,13 @@ create table message(
     content_message text not null,
 
 );
+create table categorySkill(
+    code_category_skill serial primary key,
+    category_skill varchar(100) unique
+);
 create table skills(
     code_skill serial primary key,
-    title_skill varchar(100),
-    percentual_experience decimal(5,2)
-)
+    title_skill varchar(100) unique,
+    percentual_experience decimal(5,2),
+    code_category_skill int references categorySkill(code_category_skill)
+);
