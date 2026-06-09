@@ -12,16 +12,17 @@ app.use(helmet());
 app.use(cors({
   methods:"GET, POST, PUT, PATCH, DELETE",
   origin:"http://localhost:5173/",
-  allowedHeaders:"*",
+  allowedHeaders:"*", 
 
 }))
 app.use(
   express.json({
+    limit:"10mb",
     strict: true,
   }),
 );
 
-app.use(express.urlencoded({extended:true}))
+app.use(express.urlencoded({extended:true,limit:"10mb"}))
 
 // routes
 app.use("/api/v1",router)
