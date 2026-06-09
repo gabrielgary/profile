@@ -1,5 +1,5 @@
 
-
+create database profile_db;
 
 create table users(
     code_user serial primary key,
@@ -15,7 +15,8 @@ create table projects(
     code_project serial primary key,
     title_project varchar(200) not null, 
     description_project text not null, 
-    tools_projects jsonb  not null
+    tools_projects jsonb  not null,
+    likes int
 );
 create table message(
     code_message serial primary key,
